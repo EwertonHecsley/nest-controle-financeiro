@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, HttpException, HttpStatus, Post, Res } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { UsuarioDto } from './dtos/Usuario.dto';
 import { Response } from 'express';
@@ -9,6 +9,8 @@ export class UsuarioController {
 
     @Post()
     async criarUsuario(@Body() usuario: UsuarioDto, @Res() res: Response) {
+        if (await this.usuarioService.buscarUsuarioEmail(usuario.email)) throw new HttpException('Email já cadastrado.', HttpStatus.BAD_REQUEST);
+
         const result = await this.usuarioService.createUser(usuario);
         const { senha: _, ...usuarioFormatado } = result;
 

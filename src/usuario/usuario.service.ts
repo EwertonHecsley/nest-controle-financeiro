@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/Prisma.service';
 import { UsuarioDto } from './dtos/Usuario.dto';
 import { HashSenhaService } from './services/HashSenha.service';
@@ -9,8 +9,6 @@ export class UsuarioService {
 
     async createUser(usuario: UsuarioDto) {
         const { nome, email, senha } = usuario;
-        const emailExiste = await this.buscarUsuarioEmail(usuario.email);
-        if (emailExiste) throw new HttpException("Email já cadastrado", HttpStatus.BAD_REQUEST);
 
         const senhaHash = await this.hashSenhaService.hashSenha(senha);
 
