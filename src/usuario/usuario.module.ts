@@ -6,6 +6,7 @@ import { HashSenhaService } from './services/HashSenha.service';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 
+
 @Module({
     providers: [UsuarioService, PrismaService, HashSenhaService, AuthService, JwtService],
     controllers: [UsuarioController]

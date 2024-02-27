@@ -6,17 +6,17 @@ import { HashSenhaService } from 'src/usuario/services/HashSenha.service';
 import { PrismaService } from 'src/database/Prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { UsuarioModule } from 'src/usuario/usuario.module';
+import { AuthGuard } from './auth.guard'; // Importe o AuthGuard
 
 @Module({
   imports: [
     UsuarioModule,
-    AuthModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' }
-    })
+    }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UsuarioService, HashSenhaService, PrismaService]
+  providers: [AuthService, UsuarioService, HashSenhaService, PrismaService, AuthGuard]
 })
 export class AuthModule { }
