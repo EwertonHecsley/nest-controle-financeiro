@@ -1,4 +1,4 @@
-import { Body, Controller, HttpException, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post, Res } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { UsuarioDto } from './dtos/Usuario.dto';
 import { Response } from 'express';
@@ -15,5 +15,12 @@ export class UsuarioController {
         const { senha: _, ...usuarioFormatado } = result;
 
         return res.status(HttpStatus.CREATED).json({ mensaem: 'Usuário cadastrado com sucesso.', usuario: usuarioFormatado })
+    }
+
+    //Teste de busca
+    @Get()
+    async buscarUsuario(@Res() res: Response) {
+        const usuario = await this.usuarioService.buscarUsuarioEmail('hecsleyavschin@gmail.com.br');
+        return res.status(HttpStatus.OK).json(usuario);
     }
 }

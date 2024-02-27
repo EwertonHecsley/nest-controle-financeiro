@@ -1,4 +1,4 @@
-import { Body, Controller, HttpException, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { HashSenhaService } from 'src/usuario/services/HashSenha.service';
 import { AuthUsuarioDto } from './dtos/AuthUsuario.dto';
@@ -28,4 +28,5 @@ export class AuthController {
 
         return res.status(HttpStatus.ACCEPTED).json({ mensagem: 'Usuário logado com sucesso.', usuario: usuarioFormatado, token });
     }
+
 }
