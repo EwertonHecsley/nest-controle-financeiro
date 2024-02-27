@@ -1,8 +1,7 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post, Res } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { UsuarioDto } from './dtos/Usuario.dto';
 import { Response } from 'express';
-import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -18,8 +17,7 @@ export class UsuarioController {
         return res.status(HttpStatus.CREATED).json({ mensaem: 'Usuário cadastrado com sucesso.', usuario: usuarioFormatado })
     }
 
-    //Teste de busca
-    @UseGuards(AuthGuard)
+
     @Get()
     async buscarUsuario(@Res() res: Response) {
         const usuario = await this.usuarioService.buscarUsuarioEmail('hecsleyavschin@gmail.com');
