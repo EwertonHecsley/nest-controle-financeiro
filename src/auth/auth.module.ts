@@ -6,6 +6,7 @@ import { HashSenhaService } from 'src/usuario/services/HashSenha.service';
 import { PrismaService } from 'src/database/Prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { UsuarioModule } from 'src/usuario/usuario.module';
+import { GuardService } from './Guard.service';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { UsuarioModule } from 'src/usuario/usuario.module';
     })
   ],
   controllers: [AuthController],
-  providers: [AuthService, UsuarioService, HashSenhaService, PrismaService]
+  providers: [AuthService, UsuarioService, HashSenhaService, PrismaService, GuardService]
 })
 export class AuthModule { }
